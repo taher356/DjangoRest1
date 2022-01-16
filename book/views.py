@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from .models import Book
 from .serializers import BookSerializer
+from rest_framework import permissions
 
 
 # context for linking the image on api view
@@ -14,6 +15,8 @@ class GetAllData(APIView):
 
 
 class GetFavData(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     def get(self, request):
         query = Book.objects.filter(fav=True)
         serializers = BookSerializer(query, many=True)
