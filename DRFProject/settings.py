@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'DRFProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'toplearn',
+        'USER': 'postgres',
+        'PASSWORD': '0120123',
+        'HOST': '/var/run/postgresql',
+        'PORT': '5432',
     }
 }
 
@@ -128,13 +132,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'toplearn',
-        'USER': 'postgres',
-        'PASSWORD': '0120123',
-        'HOST': '/var/run/postgresql',
-        'PORT': '5432',
-    }
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
 }
